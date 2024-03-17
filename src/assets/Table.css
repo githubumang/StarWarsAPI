@@ -1,0 +1,52 @@
+#selectOption{
+    background-color: lightgray;
+    margin-top: 20px;
+    float: right;
+    margin-right: 20px;
+    font-size: large;
+    font-weight: 600;
+    padding: 5px;
+    cursor: pointer;
+    border: 2px solid black;
+}
+#selectOption:hover{
+    background-color: white;
+}
+
+.tableDiv{
+    width: 95%;
+    margin: auto;
+    overflow-x: scroll;
+}
+
+table{
+    border: 1px solid black;
+    margin:20px;
+    width: 98%;
+    font-size: large;
+    overflow: hidden;
+}
+
+tr{
+    border: 1px solid black;
+}
+
+th{
+    border: 1px solid black;
+    max-width: 300px;
+}
+
+td{
+    border: 1px solid black;
+}
+
+.SNo{
+    width: 50px;
+    text-align: center;
+    font-weight: bold;
+}
+
+tbody tr:hover{
+    background-color: rgb(235, 235, 235);
+}
+

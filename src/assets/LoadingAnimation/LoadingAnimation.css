@@ -1,0 +1,36 @@
+.optionBox{
+    margin-top: 20px;
+    margin-left: 100%;
+    float: right;
+    margin-right: 20px;
+    height: 30px;
+    width: 80px;
+}
+
+.skeleton{
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 70%);
+    }
+
+    100% {
+        background-color: hsl(200, 20%, 95%);
+    }
+}
+
+div .tableLoader{
+    margin-left: 5%;
+}
+
+.loadingTable{
+    display: flex;
+}
+
+.loadingTableData{
+    width: 200px;
+    height: 30px;
+    margin: 2px;
+}
