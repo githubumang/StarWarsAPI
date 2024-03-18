@@ -46,7 +46,15 @@ td{
     font-weight: bold;
 }
 
-tbody tr:hover{
-    background-color: rgb(235, 235, 235);
+tbody tr:nth-child(even){
+    background-color: #eaeaea;
 }
+
+tbody tr:hover{
+    background-color: rgb(210, 210, 210);
+}
+
+/* tbody tr:nth-child(even):hover{
+    background-color: rgb(210, 210, 210);
+} */
 
