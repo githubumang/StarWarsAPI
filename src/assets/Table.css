@@ -34,6 +34,7 @@ tr{
 th{
     border: 1px solid black;
     max-width: 300px;
+    cursor: pointer;
 }
 
 td{
@@ -44,6 +45,7 @@ td{
     width: 50px;
     text-align: center;
     font-weight: bold;
+    cursor: auto;
 }
 
 tbody tr:nth-child(even){
@@ -53,8 +55,4 @@ tbody tr:nth-child(even){
 tbody tr:hover{
     background-color: rgb(210, 210, 210);
 }
-
-/* tbody tr:nth-child(even):hover{
-    background-color: rgb(210, 210, 210);
-} */
 
