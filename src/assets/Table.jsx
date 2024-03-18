@@ -4,12 +4,19 @@ import './Table.css';
 import { LoadingAnimation } from './LoadingAnimation/LoadingAnimation';
 
 export const Table = () => {
+
+    //Variable declaration start
     const [data, setData] = useState("people");
     const [loadData, setLoadData] = useState(0);
     const [peoples, setPeoples] = useState([]);
     const [vehicles, setVehicles] = useState("vechicle");
     const [films, setFilms] = useState("films");
+    const [order, setOrder] = useState("ASC");
+    const [colType, setColType] = useState();
+    //Variables declaration end
 
+
+    //Fetch the data in the useEffect and save it in variable.
     useEffect(()=>{
         const loadPeopleData = async ()=>{
             setLoadData(1);
@@ -46,10 +53,130 @@ export const Table = () => {
         loadFilmsData();
     }, [])
 
+    //When changing the option function will be call
     function changeData(e){
         setData(e);
+        setColType("");
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                         //Function to sort the table. 
+                                         //It will be activate when click any head of the table
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    const sorting = (optionType, col, varType)=>{
+        setColType(col);
+        if(optionType==="people"){
+            if(order==="ASC"){
+                if(varType==="string"){
+                    const sorted = [...peoples].sort((a,b)=>{
+                        return(a[col].toLowerCase() > b[col].toLowerCase() ? 1:-1)
+                    });
+                    setPeoples(sorted);
+                }
+                else{
+                    const sorted = [...peoples].sort((a,b)=>{
+                        return(Number(a[col]) > Number(b[col]) ? 1:-1)
+                    });
+                    setPeoples(sorted);
+                }
+            }
+            else{
+                if(varType==="string"){
+                    const sorted = [...peoples].sort((a,b)=>{
+                        return(a[col].toLowerCase() < b[col].toLowerCase() ? 1:-1)
+                    });
+                    setPeoples(sorted);
+                }
+                else{
+                    const sorted = [...peoples].sort((a,b)=>{
+                        return(Number(a[col]) < Number(b[col]) ? 1:-1)
+                    });
+                    setPeoples(sorted);
+                }
+            }
+        }
+
+        else if(optionType==="vehicle"){
+            if(order==="ASC"){
+                if(varType==="string"){
+                    const sorted = [...vehicles].sort((a,b)=>{
+                        return(a[col].toLowerCase() > b[col].toLowerCase() ? 1:-1)
+                    });
+                    setVehicles(sorted);
+                }
+                else{
+                    const sorted = [...vehicles].sort((a,b)=>{
+                        return(Number(a[col]) > Number(b[col]) ? 1:-1)
+                    });
+                    setVehicles(sorted);
+                }
+            }
+            else{
+                if(varType==="string"){
+                    const sorted = [...vehicles].sort((a,b)=>{
+                        return(a[col].toLowerCase() < b[col].toLowerCase() ? 1:-1)
+                    });
+                    setVehicles(sorted);
+                }
+                else{
+                    const sorted = [...vehicles].sort((a,b)=>{
+                        return(Number(a[col]) < Number(b[col]) ? 1:-1)
+                    });
+                    setVehicles(sorted);
+                }
+            }
+        }
+
+        else{
+            if(order==="ASC"){
+                if(varType==="string"){
+                    const sorted = [...films].sort((a,b)=>{
+                        return(a[col].toLowerCase() > b[col].toLowerCase() ? 1:-1)
+                    });
+                    setFilms(sorted);
+                }
+                else{
+                    const sorted = [...films].sort((a,b)=>{
+                        return(Number(a[col]) > Number(b[col]) ? 1:-1)
+                    });
+                    setFilms(sorted);
+                }
+            }
+            else{
+                if(varType==="string"){
+                    const sorted = [...films].sort((a,b)=>{
+                        return(a[col].toLowerCase() < b[col].toLowerCase() ? 1:-1)
+                    });
+                    setFilms(sorted);
+                }
+                else{
+                    const sorted = [...films].sort((a,b)=>{
+                        return(Number(a[col]) < Number(b[col]) ? 1:-1)
+                    });
+                    setFilms(sorted);
+                }
+            }
+        }
+
+        
+        
+        if(order=="ASC") setOrder("DSC");
+        else setOrder("ASC");
+    }
+    //Sorting function end here
+
+    function showArrow(col){
+        if(colType === col){
+            if(order==="DSC") return(<>⬇</>);
+            else return(<>⬆</>);
+        }
+    }
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                               //Function to print the table
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     function showValue(){
         if(data === "people"){
             return(
@@ -57,10 +184,10 @@ export const Table = () => {
                     <thead>
                     <tr>
                         <th className='SNo'>S. No.</th>
-                        <th>Name</th>
-                        <th>Gender</th>
-                        <th>Height</th>
-                        <th>Weight</th>
+                        <th onClick={()=>(sorting("people", "name", "string"))}>Name {showArrow("name")}</th>
+                        <th onClick={()=>(sorting("people", "gender", "string"))}>Gender {showArrow("gender")}</th>
+                        <th onClick={()=>(sorting("people", "height", "number"))}>Height {showArrow("height")}</th>
+                        <th onClick={()=>(sorting("people", "mass", "number"))}>Weight {showArrow("mass")}</th>
                     </tr>
                     </thead>
                  <tbody>
@@ -85,13 +212,13 @@ export const Table = () => {
                     <thead>
                     <tr>
                         <th className='SNo'>S. No.</th>
-                        <th>Vehicle Name</th>
-                        <th>Model</th>
-                        <th>Manufacturer</th>
-                        <th>Length</th>
-                        <th>Cost in Credits</th>
-                        <th>Max Speed</th>
-                        <th>Vehicle class</th>
+                        <th onClick={()=>(sorting("vehicle", "name", "string"))}>Vehicle Name {showArrow("name")}</th>
+                        <th onClick={()=>(sorting("vehicle", "model", "string"))}>Model {showArrow("model")}</th>
+                        <th onClick={()=>(sorting("vehicle", "manufacturer", "string"))}>Manufacturer {showArrow("manufacturer")}</th>
+                        <th onClick={()=>(sorting("vehicle", "length", "number"))}>Length {showArrow("length")}</th>
+                        <th onClick={()=>(sorting("vehicle", "cost_in_credits", "string"))}>Cost in Credits {showArrow("cost_in_credits")}</th>
+                        <th onClick={()=>(sorting("vehicle", "max_atmosphering_speed", "number"))}>Max Speed {showArrow("max_atmosphering_speed")}</th>
+                        <th onClick={()=>(sorting("vehicle", "vehicle_class", "number"))}>Vehicle class {showArrow("vehicle_class")}</th>
                     </tr>
                     </thead>
                  <tbody>
@@ -119,11 +246,11 @@ export const Table = () => {
                     <thead>
                     <tr>
                         <th className='SNo'>S. No.</th>
-                        <th>Title</th>
-                        <th>Director</th>
-                        <th>Producer</th>
-                        <th>Release Date</th>
-                        <th>Opening crawl</th>
+                        <th onClick={()=>(sorting("film", "title", "string"))}>Title {showArrow("title")}</th>
+                        <th onClick={()=>(sorting("film", "director", "string"))}>Director {showArrow("director")}</th>
+                        <th onClick={()=>(sorting("film", "producer", "number"))}>Producer {showArrow("producer")}</th>
+                        <th onClick={()=>(sorting("film", "release_date", "string"))}>Release Date {showArrow("release_date")}</th>
+                        <th onClick={()=>(sorting("film", "opening_crawl", "string"))}>Opening crawl {showArrow("opening_crawl")}</th>
                     </tr>
                     </thead>
                  <tbody>
@@ -145,6 +272,9 @@ export const Table = () => {
         }
     }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                      //Return of the main function 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <>
     {loadData===0?
